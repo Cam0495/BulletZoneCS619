@@ -15,6 +15,8 @@ import org.androidannotations.annotations.rest.RestService;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.cs619.karen.tankclient.TankClientActivity;
+import com.cs619.karen.tankclient.ui.GridUI;
 import com.cs619.karen.tankclient.util.GridWrapper;
 
 import org.androidannotations.annotations.Background;
@@ -31,6 +33,10 @@ public class PollerTask {
     @RestService
     BulletZoneRestClient restClient;
 
+    GridWrapper mGridWrapper;
+
+    Object monitor;
+
     @Background(id = "grid_poller_task")
     public void doPoll() {
         while (true) {
@@ -43,11 +49,16 @@ public class PollerTask {
     @UiThread
     public void onGridUpdate(GridWrapper gw) {
         Log.d(TAG, "grid at timestamp: " + gw.getTimeStamp());
-
+        mGridWrapper = gw;
         //busProvider.getEventBus().post(new GridUpdateEvent(gw));
     }
 
     public GridWrapper getGridWrapper( ){
         return restClient.grid();
+    }
+
+    public int[][] getGrid( ){
+        while( mGridWrapper == null ){}
+        return mGridWrapper.getGrid();
     }
 }

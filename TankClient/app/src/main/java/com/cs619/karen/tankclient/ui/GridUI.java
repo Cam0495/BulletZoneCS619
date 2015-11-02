@@ -30,4 +30,8 @@ public class GridUI {
     public int[][] getGrid( ){
         return mGrid;
     }
+
+    public void setGrid( int[][] g ){
+        mGrid = g;
+    }
 }

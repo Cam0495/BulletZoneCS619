@@ -15,6 +15,7 @@ import android.widget.GridView;
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
 import com.cs619.karen.tankclient.ui.GridAdapter;
+import com.cs619.karen.tankclient.ui.GridUI;
 import com.cs619.karen.tankclient.util.GridWrapper;
 
 import org.androidannotations.annotations.AfterViews;
@@ -45,25 +46,25 @@ public class TankClientActivity extends AppCompatActivity {
     PollerTask gridPollTask;
 
     private long tankId = -1;
-    GridWrapper mGridWrapper;
+    private int[][] grid = new int[16][16];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
-        gridView.setAdapter( mGridAdapter );
+        gridView.setAdapter(mGridAdapter);
     }
 
     @Override
@@ -105,11 +106,14 @@ public class TankClientActivity extends AppCompatActivity {
 
         }
 
-        updateGridWrapper( );
+        SystemClock.sleep(100);
+        updateGridWrapper();
     }
 
     private void updateGridWrapper( ){
-        mGridWrapper = gridPollTask.getGridWrapper();
-        mGridAdapter.updateList( mGridWrapper.getGrid() );
+        while( true ) {
+            mGridAdapter.updateList(gridPollTask.getGrid());
+            SystemClock.sleep(100);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.cs619.karen.tankclient.ui;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,11 @@ public class GridAdapter extends BaseAdapter {
 
     public void updateList(int[][] entities) {
         synchronized (monitor) {
+            for( int i = 0; i < 16; i++ ){
+                for( int k = 0; k < 16; k++ ){
+                    Log.d( "POLLER", "" + entities[i][k]);
+                }
+            }
             this.mEntities = entities;
             this.notifyDataSetChanged();
         }
