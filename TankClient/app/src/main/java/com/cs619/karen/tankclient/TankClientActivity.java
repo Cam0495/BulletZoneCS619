@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
@@ -38,6 +39,7 @@ public class TankClientActivity extends AppCompatActivity {
     @ViewById
     protected GridView gridView;
 
+    protected Button up_button,down_button,left_button, right_button;
 
     @RestService
     BulletZoneRestClient restClient;
@@ -64,6 +66,7 @@ public class TankClientActivity extends AppCompatActivity {
             }
         });*/
 
+        addButtonLister();
         gridView.setAdapter(mGridAdapter);
     }
 
@@ -115,5 +118,38 @@ public class TankClientActivity extends AppCompatActivity {
             mGridAdapter.updateList(gridPollTask.getGrid());
             SystemClock.sleep(100);
         }
+    }
+
+    private void addButtonLister(){
+
+        up_button = (Button) findViewById(R.id.up_button);
+        down_button = (Button) findViewById(R.id.down_button);
+        right_button = (Button) findViewById(R.id.right_button);
+        left_button = (Button) findViewById(R.id.left_button);
+
+        up_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Button Clicked", "Up Button");
+            }
+        });
+        down_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Button Clicked", "Down Button");
+            }
+        });
+        right_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Button Clicked", "Right Button");
+            }
+        });
+        left_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Button Clicked", "Left Button");
+            }
+        });
     }
 }
