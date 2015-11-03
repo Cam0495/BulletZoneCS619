@@ -2,6 +2,7 @@
 <items version="2" >
 
     <item
+<<<<<<< HEAD
         jar="/Users/BBryant12/.gradle/caches/modules-2/files-2.1/org.springframework.android/spring-android-rest-template/1.0.1.RELEASE/e132d929bd181941f79b0d63edafb8a86ae6fd33/spring-android-rest-template-1.0.1.RELEASE.jar"
         jumboMode="false"
         revision="23.0.1"
@@ -21,11 +22,33 @@
         revision="23.0.1"
         sha1="ac33174269a767fcbf3a944cdb3d52e07ef93bee">
         <dex dex="/Users/BBryant12/AndroidStudioProjects/BulletZoneCS619/TankClient/app/build/intermediates/pre-dexed/debug/androidannotations-api-3.1-2fac3984eca4ebf2fe1ef30df13debc915ac7725.jar" />
+=======
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\org.springframework.android\spring-android-rest-template\1.0.1.RELEASE\e132d929bd181941f79b0d63edafb8a86ae6fd33\spring-android-rest-template-1.0.1.RELEASE.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e132d929bd181941f79b0d63edafb8a86ae6fd33">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\spring-android-rest-template-1.0.1.RELEASE-1b82f0c4be971375b88f983ff2c15b7499f44318.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.3.2\c75edc740a6d8cb1cef6fa82fa594e0bce561916\jackson-databind-2.3.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c75edc740a6d8cb1cef6fa82fa594e0bce561916">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\jackson-databind-2.3.2-da0534f6073df3c35a88730d86a7c441ec3d5e52.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\org.androidannotations\androidannotations-api\3.1\ac33174269a767fcbf3a944cdb3d52e07ef93bee\androidannotations-api-3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ac33174269a767fcbf3a944cdb3d52e07ef93bee">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\androidannotations-api-3.1-3c57cbbaa1a08e25965b1b7288ff0fc56f99efc2.jar" />
+>>>>>>> Display-Grid
     </item>
     <item
         jar="/Users/BBryant12/AndroidStudioProjects/BulletZoneCS619/TankClient/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
+<<<<<<< HEAD
         sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
         <dex dex="/Users/BBryant12/AndroidStudioProjects/BulletZoneCS619/TankClient/app/build/intermediates/pre-dexed/debug/classes-b8524fd5248b9cd95e69c96cef56d0a21822c962.jar" />
     </item>
@@ -84,6 +107,66 @@
         revision="23.0.1"
         sha1="7941cd2c2c8ec006800d75c35f8a9dacf892ab93">
         <dex dex="/Users/BBryant12/AndroidStudioProjects/BulletZoneCS619/TankClient/app/build/intermediates/pre-dexed/debug/otto-1.3.5-3d1ba06cfa7ee1383ddd7c7cb5728246687dcbee.jar" />
+=======
+        sha1="e68f0e8e4b636ee30c4de58953be38d9b72a5e3b">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\spring-android-core-1.0.1.RELEASE-30de602fb233a4b00c33644772b680db99904231.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\classes-dd88d1870d7e78d55e61090bf618a4605466e1a9.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.3.0\f5e853a20b60758922453d56f9ae1e64af5cb3da\jackson-annotations-2.3.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f5e853a20b60758922453d56f9ae1e64af5cb3da">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.3.0-f9e000bbe1143d64385ff2ccce7a6e896885e505.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.3.2\559b70ac8a0d5cad611da4223137a920147201ba\jackson-core-2.3.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="559b70ac8a0d5cad611da4223137a920147201ba">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\jackson-core-2.3.2-1820b2bbfe2711e44a1c6a496d2a5f3269463679.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\exploded-aar\com.android.support\design\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\classes-2c17a6832403512527d28a17977fabf4c9f7090b.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\.gradle\caches\modules-2\files-2.1\com.squareup\otto\1.3.5\7941cd2c2c8ec006800d75c35f8a9dacf892ab93\otto-1.3.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7941cd2c2c8ec006800d75c35f8a9dacf892ab93">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\otto-1.3.5-34e49b9529518476a4055a0e1f6e57a8badf035b.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-b0f70d34a694ae74aa5eb0cf3bd42228f2a0a0c2.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\classes-3cfc7db6f77f00926db04158cc5b598ffe9fcd2c.jar" />
+    </item>
+    <item
+        jar="C:\Users\cdevine\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\cdevine\Desktop\BulletZoneCS619\BulletZoneCS619\TankClient\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-9609badebc13581eb49de8561f9ba4917c5889e6.jar" />
+>>>>>>> Display-Grid
     </item>
 
 </items>
