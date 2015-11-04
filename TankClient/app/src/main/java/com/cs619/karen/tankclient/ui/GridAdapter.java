@@ -1,5 +1,6 @@
 package com.cs619.karen.tankclient.ui;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,17 +17,19 @@ import com.cs619.karen.tankclient.R;
 public class GridAdapter extends BaseAdapter {
 
     private final Object monitor = new Object();
+
     @SystemService
     protected LayoutInflater inflater;
+
+    protected Context mContext;
     private int[][] mEntities = new int[16][16];
+
+    public GridAdapter( Context context ){
+        mContext = context;
+    }
 
     public void updateList(int[][] entities) {
         synchronized (monitor) {
-            for( int i = 0; i < 16; i++ ){
-                for( int k = 0; k < 16; k++ ){
-                    Log.d( "POLLER", "" + entities[i][k]);
-                }
-            }
             this.mEntities = entities;
             this.notifyDataSetChanged();
         }
@@ -50,6 +53,9 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        Log.d( "Adapter", "IN VIEW");
+
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.field_item, null);
         }
@@ -68,9 +74,9 @@ public class GridAdapter extends BaseAdapter {
                         ((TextView) convertView).setText("B");
                     } else if (val >= 10000000 && val <= 20000000) {
                         ((TextView) convertView).setText("T");
+                    } else {
+                        ((TextView) convertView).setText("E");
                     }
-                } else {
-                    ((TextView) convertView).setText("");
                 }
             }
         }

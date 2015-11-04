@@ -2,28 +2,22 @@ package com.cs619.karen.tankclient;
 
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
 import com.cs619.karen.tankclient.ui.GridAdapter;
-import com.cs619.karen.tankclient.ui.GridUI;
-import com.cs619.karen.tankclient.util.GridWrapper;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.NonConfigurationInstance;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
 
@@ -48,7 +42,7 @@ public class TankClientActivity extends AppCompatActivity {
     PollerTask gridPollTask;
 
     private long tankId = -1;
-    private int[][] grid = new int[16][16];
+    public int[][] grid = new int[16][16];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +60,15 @@ public class TankClientActivity extends AppCompatActivity {
             }
         });*/
 
+        for( int i = 0; i < 16; i++ ){
+            for( int k = 0; k < 16; k++ ){
+                grid[i][k] = 1000;
+            }
+        }
+        gridView = (GridView) findViewById(R.id.gridView);
+        mGridAdapter = new GridAdapter( TankClientActivity.this );
+        displayGrid();
         addButtonLister();
-        gridView.setAdapter(mGridAdapter);
     }
 
     @Override
@@ -95,7 +96,7 @@ public class TankClientActivity extends AppCompatActivity {
     protected void afterViewInjection() {
         joinAsync();
         SystemClock.sleep(500);
-        //gridView.setAdapter(mGridAdapter);
+        displayGrid( );
     }
 
     @Background
@@ -115,9 +116,13 @@ public class TankClientActivity extends AppCompatActivity {
 
     private void updateGridWrapper( ){
         while( true ) {
-            mGridAdapter.updateList(gridPollTask.getGrid());
             SystemClock.sleep(100);
         }
+    }
+
+    private void displayGrid( ){
+        gridView.setAdapter( mGridAdapter );
+        mGridAdapter.updateList( grid );
     }
 
     private void addButtonLister(){

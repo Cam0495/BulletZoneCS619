@@ -35,8 +35,6 @@ public class PollerTask {
 
     GridWrapper mGridWrapper;
 
-    Object monitor;
-
     @Background(id = "grid_poller_task")
     public void doPoll() {
         while (true) {
