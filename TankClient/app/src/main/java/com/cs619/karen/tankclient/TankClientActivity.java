@@ -66,12 +66,9 @@ public class TankClientActivity extends AppCompatActivity {
             }
         }
         gridView = (GridView) findViewById(R.id.gridView);
-        mGridAdapter = new GridAdapter( );
-        gridView.setAdapter(mGridAdapter);
-        mGridAdapter.updateList( grid );
-
+        mGridAdapter = new GridAdapter( TankClientActivity.this );
+        displayGrid();
         addButtonLister();
-        gridView.setAdapter(mGridAdapter);
     }
 
     @Override
@@ -99,6 +96,7 @@ public class TankClientActivity extends AppCompatActivity {
     protected void afterViewInjection() {
         joinAsync();
         SystemClock.sleep(500);
+        displayGrid( );
     }
 
     @Background
@@ -118,9 +116,13 @@ public class TankClientActivity extends AppCompatActivity {
 
     private void updateGridWrapper( ){
         while( true ) {
-            //mGridAdapter.updateList(gridPollTask.getGrid());
             SystemClock.sleep(100);
         }
+    }
+
+    private void displayGrid( ){
+        gridView.setAdapter( mGridAdapter );
+        mGridAdapter.updateList( grid );
     }
 
     private void addButtonLister(){
