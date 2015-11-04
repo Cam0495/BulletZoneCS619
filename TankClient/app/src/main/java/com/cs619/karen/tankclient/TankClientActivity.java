@@ -2,12 +2,17 @@ package com.cs619.karen.tankclient;
 
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ScrollView;
 
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
@@ -30,7 +35,7 @@ public class TankClientActivity extends AppCompatActivity {
     protected GridAdapter mGridAdapter;
 
     @ViewById
-    protected GridView gridView2;
+    protected GridView gridView;
 
     protected Button up_button,down_button,left_button, right_button;
 
@@ -47,32 +52,27 @@ public class TankClientActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /*fab.setOnClickListener(new View.OnClickListener() {
+        /**FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });*/
-<<<<<<< HEAD
 
-        addButtonLister();
-        gridView.setAdapter(mGridAdapter);
-=======
         for( int i = 0; i < 16; i++ ){
-            for( int k = 0; k < 16; k++ ){
+            for ( int k = 0; k < 16; k++ ){
                 grid[i][k] = 1000;
             }
         }
-        gridView2 = (GridView) findViewById(R.id.gridView);
-        mGridAdapter = new GridAdapter( );
-        gridView2.setAdapter(mGridAdapter);
-        mGridAdapter.updateList( grid );
->>>>>>> Display-Grid
+        gridView = (GridView) findViewById(R.id.gridView);
+        mGridAdapter = new GridAdapter( TankClientActivity.this );
+        displayGrid( );
+        addButtonLister();
     }
 
     @Override
@@ -114,46 +114,52 @@ public class TankClientActivity extends AppCompatActivity {
         }
 
         SystemClock.sleep(100);
-        updateGridWrapper();
+        //updateGridWrapper();
     }
 
     private void updateGridWrapper( ){
         while( true ) {
-            //mGridAdapter.updateList(gridPollTask.getGrid());
+            if( mGridAdapter != null )
+                mGridAdapter.updateList(gridPollTask.getGrid());
             SystemClock.sleep(100);
         }
     }
 
     private void addButtonLister(){
 
-        up_button = (Button) findViewById(R.id.up_button);
-        down_button = (Button) findViewById(R.id.down_button);
-        right_button = (Button) findViewById(R.id.right_button);
-        left_button = (Button) findViewById(R.id.left_button);
+        up_button = (Button) findViewById(R.id.buttonUp);
+        down_button = (Button) findViewById(R.id.buttonDown);
+        right_button = (Button) findViewById(R.id.buttonRight);
+        left_button = (Button) findViewById(R.id.buttonLeft);
 
         up_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Button Clicked", "Up Button");
+                Log.d("Button Clicked", "Up Button");
             }
         });
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Button Clicked", "Down Button");
+                Log.d("Button Clicked", "Down Button");
             }
         });
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Button Clicked", "Right Button");
+                Log.d("Button Clicked", "Right Button");
             }
         });
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Button Clicked", "Left Button");
+                Log.d("Button Clicked", "Left Button");
             }
         });
+    }
+
+    private void displayGrid( ){
+        gridView.setAdapter(mGridAdapter);
+        mGridAdapter.updateList(grid);
     }
 }

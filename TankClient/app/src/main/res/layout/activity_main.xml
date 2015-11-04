@@ -3,50 +3,89 @@
               android:id="@+id/LinearLayout1"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="horizontal"
               android:paddingBottom="@dimen/activity_vertical_margin"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
               tools:context=".ClientActivity"
-              android:baselineAligned="false">
+              android:orientation="vertical">
 
 
-    <Button
-        android:layout_width="wrap_content"
+    <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+
         android:layout_height="wrap_content"
-        android:text="Up"
-        android:id="@+id/up_button"
-        android:layout_gravity="bottom" />
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Down"
-        android:id="@+id/down_button"
-        android:layout_gravity="bottom" />
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <GridView
-    android:id="@+id/gridView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:columnWidth="20dp"
-    android:numColumns="16"
-    tools:listitem="@layout/field_item"/>
-
-    <Button
+        android:id="@+id/gridView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Left"
-        android:id="@+id/left_button"
-        android:layout_gravity="bottom" />
+        android:layout_height="0dp"
+        android:numColumns="16"
+        android:columnWidth="20dp"
+        android:layout_weight="1"
+        tools:listitem="@layout/field_item"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Right"
-        android:id="@+id/right_button"
-        android:layout_gravity="bottom" />
+    <RelativeLayout
+        android:id="@+id/LinearLayoutControl"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_gravity="bottom"
+        >
 
+        <Button
+            android:id="@+id/buttonDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/down" />
+
+        <Button
+            android:id="@+id/buttonUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/buttonDown"
+            android:layout_alignLeft="@+id/buttonDown"
+            android:layout_alignRight="@+id/buttonDown"
+            android:text="@string/up" />
+
+        <Button
+            android:id="@+id/buttonLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/buttonDown"
+            android:text="@string/left" />
+
+        <Button
+            android:id="@+id/buttonRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/buttonDown"
+            android:text="@string/right" />
+
+        <Button
+            android:id="@+id/buttonFire"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fire"
+            android:layout_above="@+id/buttonUp"
+            android:layout_alignLeft="@+id/buttonUp"
+            android:layout_alignStart="@+id/buttonUp"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
