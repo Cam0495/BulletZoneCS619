@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -30,7 +31,7 @@ public class TankClientActivity extends AppCompatActivity {
     protected GridAdapter mGridAdapter;
 
     @ViewById
-    protected GridView gridView2;
+    protected GridView gridView;
 
     protected Button up_button,down_button,left_button, right_button;
 
@@ -58,21 +59,17 @@ public class TankClientActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
-<<<<<<< HEAD
 
-        addButtonLister();
-        gridView.setAdapter(mGridAdapter);
-=======
         for( int i = 0; i < 16; i++ ){
             for( int k = 0; k < 16; k++ ){
                 grid[i][k] = 1000;
             }
         }
-        gridView2 = (GridView) findViewById(R.id.gridView);
-        mGridAdapter = new GridAdapter( );
-        gridView2.setAdapter(mGridAdapter);
-        mGridAdapter.updateList( grid );
->>>>>>> Display-Grid
+
+        gridView = (GridView) findViewById(R.id.gridView);
+        mGridAdapter = new GridAdapter( TankClientActivity.this );
+        displayGrid();
+        addButtonLister();
     }
 
     @Override
@@ -100,6 +97,7 @@ public class TankClientActivity extends AppCompatActivity {
     protected void afterViewInjection() {
         joinAsync();
         SystemClock.sleep(500);
+        displayGrid( );
     }
 
     @Background
@@ -119,9 +117,13 @@ public class TankClientActivity extends AppCompatActivity {
 
     private void updateGridWrapper( ){
         while( true ) {
-            //mGridAdapter.updateList(gridPollTask.getGrid());
             SystemClock.sleep(100);
         }
+    }
+
+    private void displayGrid( ){
+        gridView.setAdapter( mGridAdapter );
+        mGridAdapter.updateList( grid );
     }
 
     private void addButtonLister(){
