@@ -26,11 +26,13 @@
         android:layout_gravity="bottom" />
 
     <GridView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="16"
-        tools:listitem="@layout/field_item"
-        android:id="@+id/gridView"/>
+
+    android:id="@+id/gridView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnWidth="20dp"
+    android:numColumns="16"
+    tools:listitem="@layout/field_item"/>
 
     <Button
         android:layout_width="wrap_content"
