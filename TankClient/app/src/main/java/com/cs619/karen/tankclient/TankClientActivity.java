@@ -66,6 +66,7 @@ public class TankClientActivity extends AppCompatActivity {
             }
         }
 
+        Log.i("hi", "hi ");
         gridView = (GridView) findViewById(R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
         displayGrid();
