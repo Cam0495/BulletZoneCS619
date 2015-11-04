@@ -1,5 +1,6 @@
 package com.cs619.karen.tankclient;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
@@ -59,6 +61,12 @@ public class TankClientActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
+        ImageView imageView;
+
+        imageView = (ImageView) findViewById( R.id.imageView);
+        Drawable drawable =  getResources().getDrawable(R.drawable.tank);
+        imageView.setImageDrawable(drawable);
 
         for( int i = 0; i < 16; i++ ){
             for( int k = 0; k < 16; k++ ){
