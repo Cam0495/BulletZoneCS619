@@ -111,19 +111,12 @@ public class TankClientActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-
-        SystemClock.sleep(100);
-        updateGridWrapper();
     }
 
-    private void updateGridWrapper( ){
-        while( true ) {
-            SystemClock.sleep(100);
-        }
-    }
 
     private void displayGrid( ){
         gridView.setAdapter( mGridAdapter );
+        gridPollTask.addObserver( mGridAdapter );
         mGridAdapter.updateList( grid );
     }
 

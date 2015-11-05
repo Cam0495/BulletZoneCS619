@@ -13,8 +13,11 @@ import org.androidannotations.annotations.SystemService;
 
 import com.cs619.karen.tankclient.R;
 
+import java.util.Observable;
+import java.util.Observer;
+
 @EBean
-public class GridAdapter extends BaseAdapter {
+public class GridAdapter extends BaseAdapter implements Observer {
 
     private final Object monitor = new Object();
 
@@ -26,6 +29,11 @@ public class GridAdapter extends BaseAdapter {
 
     public GridAdapter( Context context ){
         mContext = context;
+    }
+
+    @Override
+    public void update( Observable observer, Object object ){
+        updateList( (int[][]) object );
     }
 
     public void updateList(int[][] entities) {
@@ -53,8 +61,6 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Log.d( "Adapter", "IN VIEW");
-
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.field_item, null);
@@ -75,7 +81,7 @@ public class GridAdapter extends BaseAdapter {
                     } else if (val >= 10000000 && val <= 20000000) {
                         ((TextView) convertView).setText("T");
                     } else {
-                        ((TextView) convertView).setText("E");
+                        ((TextView) convertView).setText("-");
                     }
                 }
             }

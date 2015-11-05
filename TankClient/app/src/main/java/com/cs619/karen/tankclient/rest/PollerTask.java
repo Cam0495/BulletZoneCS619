@@ -26,14 +26,16 @@ import org.androidannotations.annotations.RootContext;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.rest.RestService;
 
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Set;
+
 @EBean
-public class PollerTask {
+public class PollerTask extends Observable{
     private static final String TAG = "GridPollerTask";
 
     @RestService
     BulletZoneRestClient restClient;
-
-    GridWrapper mGridWrapper;
 
     @Background(id = "grid_poller_task")
     public void doPoll() {
@@ -47,16 +49,12 @@ public class PollerTask {
     @UiThread
     public void onGridUpdate(GridWrapper gw) {
         Log.d(TAG, "grid at timestamp: " + gw.getTimeStamp());
-        mGridWrapper = gw;
+        setChanged( );
+        notifyObservers( gw.getGrid() );
+        clearChanged();
         //busProvider.getEventBus().post(new GridUpdateEvent(gw));
     }
 
-    public GridWrapper getGridWrapper( ){
-        return restClient.grid();
-    }
 
-    public int[][] getGrid( ){
-        while( mGridWrapper == null ){}
-        return mGridWrapper.getGrid();
-    }
+
 }
