@@ -1,7 +1,8 @@
 package com.cs619.karen.tankclient.ui;
 
 /**
- * Created by cdevine on 10/30/2015.
+ * Created by cdevine on 11/5/2015.
  */
-public class GameEntityUI {
+public interface GameEntityUI {
+    void make( );
 }
