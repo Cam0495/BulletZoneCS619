@@ -13,6 +13,7 @@ import android.widget.GridView;
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
 import com.cs619.karen.tankclient.ui.GridAdapter;
+import com.cs619.karen.tankclient.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -42,31 +43,14 @@ public class TankClientActivity extends AppCompatActivity {
     PollerTask gridPollTask;
 
     private long tankId = -1;
-    public int[][] grid = new int[16][16];
+
+    private TankService mTankService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
 
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /*fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
-        for( int i = 0; i < 16; i++ ){
-            for( int k = 0; k < 16; k++ ){
-                grid[i][k] = 1000;
-            }
-        }
-
-        Log.i("hi", "hi ");
         gridView = (GridView) findViewById(R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
         displayGrid();
@@ -98,14 +82,14 @@ public class TankClientActivity extends AppCompatActivity {
     protected void afterViewInjection() {
         joinAsync();
         SystemClock.sleep(500);
-        displayGrid( );
+        displayGrid();
     }
 
     @Background
     void joinAsync() {
         try {
             tankId = restClient.join().getResult();
-
+            mTankService = new TankService( restClient, tankId );
             Log.d(TAG, "tankId is " + tankId);
             gridPollTask.doPoll(); // start polling the server
         } catch (Exception e) {
@@ -115,9 +99,8 @@ public class TankClientActivity extends AppCompatActivity {
 
 
     private void displayGrid( ){
-        gridView.setAdapter( mGridAdapter );
+        gridView.setAdapter(mGridAdapter);
         gridPollTask.addObserver( mGridAdapter );
-        mGridAdapter.updateList( grid );
     }
 
     private void addButtonLister(){
@@ -131,20 +114,24 @@ public class TankClientActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("Button Clicked", "Up Button");
+                mTankService.move( (byte)0 );
             }
         });
+
         down_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Button Clicked", "Down Button");
             }
         });
+
         right_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i("Button Clicked", "Right Button");
             }
         });
+
         left_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
