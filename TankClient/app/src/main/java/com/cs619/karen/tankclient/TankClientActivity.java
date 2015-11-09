@@ -53,8 +53,16 @@ public class TankClientActivity extends AppCompatActivity {
 
         gridView = (GridView) findViewById(R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
+        up_button = (Button) findViewById( R.id.up_button );
+        up_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d( TAG, "MOVE UP");
+                mTankService.move((byte) 2);
+            }
+        });
         displayGrid();
-        addButtonLister();
+        //addButtonLister();
     }
 
     @Override
@@ -103,7 +111,7 @@ public class TankClientActivity extends AppCompatActivity {
         gridPollTask.addObserver( mGridAdapter );
     }
 
-    private void addButtonLister(){
+    /*private void addButtonLister(){
 
         up_button = (Button) findViewById(R.id.up_button);
         down_button = (Button) findViewById(R.id.down_button);
@@ -138,5 +146,40 @@ public class TankClientActivity extends AppCompatActivity {
                 Log.i("Button Clicked", "Left Button");
             }
         });
+    }*/
+
+    @Background
+    public void moveUp(View view ){
+        boolean moved = mTankService.move( (byte) 0 ).isResult();
+        Log.d(TAG, "MOVE UP");
+        Log.d(TAG, "" + moved);
+    }
+
+    @Background
+    public void moveDown( View view ){
+        boolean moved = mTankService.move( (byte ) 4 ).isResult();
+        Log.d(TAG, "MOVE DOWN");
+        Log.d(TAG, "" + moved);
+    }
+
+    @Background
+    public void turnLeft(View view ){
+        boolean moved = mTankService.turn((byte) 6).isResult();
+        Log.d( TAG, "TURN LEFT");
+        Log.d( TAG, "" + moved );
+    }
+
+    @Background
+    public void turnRight(View view ){
+        boolean moved = mTankService.turn( (byte) 2 ).isResult();
+        Log.d( TAG, "TURN RIGHT");
+        Log.d( TAG, "" + moved );
+    }
+
+    @Background
+    public void fire( View view ){
+        boolean fired = mTankService.fire().isResult();
+        Log.d(TAG,"FIRED");
+        Log.d(TAG, "" + fired );
     }
 }

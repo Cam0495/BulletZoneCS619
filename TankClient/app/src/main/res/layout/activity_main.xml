@@ -21,7 +21,7 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="98dp">
+        android:layout_height="139dp">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,8 @@
             android:layout_gravity="bottom"
             android:layout_above="@+id/right_button"
             android:layout_alignLeft="@+id/down_button"
-            android:layout_alignStart="@+id/down_button"/>
+            android:layout_alignStart="@+id/down_button"
+            android:onClick="moveUp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
             android:id="@+id/down_button"
             android:layout_gravity="bottom"
             android:layout_alignTop="@+id/right_button"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:onClick="moveDown"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -49,7 +51,8 @@
             android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/up_button"
-            android:layout_toStartOf="@+id/up_button"/>
+            android:layout_toStartOf="@+id/up_button"
+            android:onClick="turnLeft"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -59,7 +62,20 @@
             android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/up_button"
-            android:layout_toEndOf="@+id/up_button"/>
+            android:layout_toEndOf="@+id/up_button"
+            android:onClick="turnRight"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FIRE"
+            android:id="@+id/fire_button"
+            android:layout_above="@+id/up_button"
+            android:layout_alignRight="@+id/up_button"
+            android:layout_alignEnd="@+id/up_button"
+            android:layout_alignLeft="@+id/up_button"
+            android:layout_alignStart="@+id/up_button"
+            android:onClick="fire"/>
     </RelativeLayout>
 
 
