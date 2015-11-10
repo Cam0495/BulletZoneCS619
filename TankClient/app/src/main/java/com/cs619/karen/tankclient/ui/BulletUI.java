@@ -5,8 +5,7 @@ package com.cs619.karen.tankclient.ui;
  */
 public class BulletUI implements GameEntityUI {
 
-    @Override
-    public void make( ){
+    public BulletUI( int value ){
 
     }
 }

@@ -5,8 +5,7 @@ package com.cs619.karen.tankclient.ui;
  */
 public class WallUI implements GameEntityUI {
 
-    @Override
-    public void make( ){
+    public WallUI( int value ){
 
     }
 }

@@ -1,5 +1,8 @@
 package com.cs619.karen.tankclient;
 
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import android.widget.GridView;
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
 import com.cs619.karen.tankclient.ui.GridAdapter;
+import com.cs619.karen.tankclient.util.ButtonListener;
+import com.cs619.karen.tankclient.util.ShakeListener;
 import com.cs619.karen.tankclient.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,8 +39,6 @@ public class TankClientActivity extends AppCompatActivity {
     @ViewById
     protected GridView gridView;
 
-    protected Button up_button,down_button,left_button, right_button;
-
     @RestService
     BulletZoneRestClient restClient;
 
@@ -46,6 +49,12 @@ public class TankClientActivity extends AppCompatActivity {
 
     private TankService mTankService;
 
+    private ButtonListener myListener;
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeListener mShakeDetector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +64,7 @@ public class TankClientActivity extends AppCompatActivity {
         mGridAdapter = new GridAdapter( TankClientActivity.this );
         displayGrid();
         addButtonLister();
+        addShaker( );
     }
 
     @Override
@@ -100,43 +110,66 @@ public class TankClientActivity extends AppCompatActivity {
 
     private void displayGrid( ){
         gridView.setAdapter(mGridAdapter);
-        gridPollTask.addObserver( mGridAdapter );
+        gridPollTask.addObserver(mGridAdapter);
     }
 
     private void addButtonLister(){
+        myListener = new ButtonListener( mTankService );
+    }
 
-        up_button = (Button) findViewById(R.id.up_button);
-        down_button = (Button) findViewById(R.id.down_button);
-        right_button = (Button) findViewById(R.id.right_button);
-        left_button = (Button) findViewById(R.id.left_button);
-
-        up_button.setOnClickListener(new View.OnClickListener() {
+    private void addShaker( ){
+        mSensorManager = (SensorManager) getSystemService( Context.SENSOR_SERVICE );
+        mAccelerometer = mSensorManager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
+        mShakeDetector = new ShakeListener();
+        mShakeDetector.setOnShakeListener(new ShakeListener.OnShakeListener() {
             @Override
-            public void onClick(View v) {
-                Log.i("Button Clicked", "Up Button");
-                mTankService.move( (byte)0 );
-            }
-        });
-
-        down_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Button Clicked", "Down Button");
-            }
-        });
-
-        right_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Button Clicked", "Right Button");
-            }
-        });
-
-        left_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("Button Clicked", "Left Button");
+            public void onShake(int count) {
+                Log.d( TAG, "SHOOK");
+                fire( );
             }
         });
     }
+
+    @Background
+    public void moveUp(View view ){
+        boolean moved = mTankService.move( (byte) 0 ).isResult();
+        Log.d(TAG, "MOVE UP");
+        Log.d(TAG, "" + moved);
+    }
+
+    @Background
+    public void moveDown( View view ){
+        boolean moved = mTankService.move( (byte ) 4 ).isResult();
+        Log.d(TAG, "MOVE DOWN");
+        Log.d(TAG, "" + moved);
+    }
+
+    @Background
+    public void turnLeft(View view ){
+        boolean moved = mTankService.turn((byte) 6).isResult();
+        Log.d(TAG, "TURN LEFT");
+        Log.d(TAG, "" + moved);
+    }
+
+    @Background
+    public void turnRight(View view ){
+        boolean moved = mTankService.turn( (byte) 2 ).isResult();
+        Log.d( TAG, "TURN RIGHT");
+        Log.d( TAG, "" + moved );
+    }
+
+    @Background
+    public void fire( View view ){
+        boolean fired = mTankService.fire().isResult();
+        Log.d(TAG,"FIRED");
+        Log.d(TAG, "" + fired);
+    }
+
+    @Background
+    public void fire(  ){
+        boolean fired = mTankService.fire().isResult();
+        Log.d(TAG,"FIRED");
+        Log.d(TAG, "" + fired);
+    }
+
 }
