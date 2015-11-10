@@ -1,5 +1,6 @@
 package com.cs619.karen.tankclient;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import com.cs619.karen.tankclient.rest.BulletZoneRestClient;
 import com.cs619.karen.tankclient.rest.PollerTask;
 import com.cs619.karen.tankclient.ui.GridAdapter;
+import com.cs619.karen.tankclient.ui.TankUI;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -28,6 +30,7 @@ public class TankClientActivity extends AppCompatActivity {
 
     private static final String TAG = "TankClientActivity";
 
+    TankUI tankUI = new TankUI();
 
     @Bean
     protected GridAdapter mGridAdapter;
@@ -46,6 +49,8 @@ public class TankClientActivity extends AppCompatActivity {
     private long tankId = -1;
     public int[][] grid = new int[16][16];
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,11 +67,7 @@ public class TankClientActivity extends AppCompatActivity {
             }
         });*/
 
-        ImageView imageView;
 
-        imageView = (ImageView) findViewById( R.id.imageView);
-        Drawable drawable =  getResources().getDrawable(R.drawable.tank);
-        imageView.setImageDrawable(drawable);
 
         for( int i = 0; i < 16; i++ ){
             for( int k = 0; k < 16; k++ ){
