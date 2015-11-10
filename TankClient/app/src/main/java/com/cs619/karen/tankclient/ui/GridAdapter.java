@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.SystemService;
+import org.w3c.dom.Text;
 
 import com.cs619.karen.tankclient.R;
 
@@ -26,6 +27,7 @@ public class GridAdapter extends BaseAdapter implements Observer {
 
     protected Context mContext;
     private int[][] mEntities = new int[16][16];
+    EntityFactory factory = new RegularFactory( );
 
     public GridAdapter( Context context ){
         mContext = context;
@@ -74,6 +76,8 @@ public class GridAdapter extends BaseAdapter implements Observer {
         if (convertView instanceof TextView) {
             synchronized (monitor) {
                 if (val > 0) {
+
+                    //factory.makeEntity( val );
                     if (val == 1000) {
                         ((TextView) convertView).setText("W");
                     } else if (val >= 2000000 && val <= 3000000) {
@@ -83,6 +87,9 @@ public class GridAdapter extends BaseAdapter implements Observer {
                     } else {
                         ((TextView) convertView).setText("-");
                     }
+                }
+                else{
+                    ((TextView) convertView).setText("-");
                 }
             }
         }

@@ -11,19 +11,37 @@ import java.util.Observer;
 public class TankService{
 
     long tankID;
+    byte mDirection;
     BulletZoneRestClient mRestClient;
 
     public TankService( BulletZoneRestClient restClient, long tankid ){
         tankID = tankid;
+        mDirection = 0;
         mRestClient = restClient;
     }
 
     public BooleanWrapper move( byte direction ){
-        return mRestClient.move( tankID, direction );
+        if( direction == (byte)0 ) {
+            return mRestClient.move(tankID, mDirection);
+        }
+        else {
+            return mRestClient.move(tankID, direction);
+        }
     }
 
     public BooleanWrapper turn( byte direction ){
-        return mRestClient.turn(tankID, direction);
+        if( direction == (byte)2 ) {
+            mDirection = (byte)(direction + 2);
+            if( mDirection == 8 )
+                mDirection = 0;
+            return mRestClient.turn(tankID, mDirection);
+        }
+        else {
+            mDirection = (byte)(direction - 2);
+            if( mDirection == -2 )
+                mDirection = 6;
+            return mRestClient.turn(tankID, mDirection);
+        }
     }
 
     public BooleanWrapper fire(  ){
