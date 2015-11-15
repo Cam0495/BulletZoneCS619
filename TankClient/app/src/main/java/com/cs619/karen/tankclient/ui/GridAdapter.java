@@ -1,19 +1,15 @@
 package com.cs619.karen.tankclient.ui;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
-
+import android.widget.ImageView;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.SystemService;
-import org.w3c.dom.Text;
-
+import com.squareup.picasso.Picasso;
 import com.cs619.karen.tankclient.R;
-
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,7 +23,6 @@ public class GridAdapter extends BaseAdapter implements Observer {
 
     protected Context mContext;
     private int[][] mEntities = new int[16][16];
-    EntityFactory factory = new RegularFactory( );
 
     public GridAdapter( Context context ){
         mContext = context;
@@ -64,6 +59,7 @@ public class GridAdapter extends BaseAdapter implements Observer {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.field_item, null);
         }
@@ -73,27 +69,40 @@ public class GridAdapter extends BaseAdapter implements Observer {
 
         int val = mEntities[row][col];
 
-        if (convertView instanceof TextView) {
+        if (convertView instanceof ImageView) {
             synchronized (monitor) {
                 if (val > 0) {
 
-                    //factory.makeEntity( val );
                     if (val == 1000) {
-                        ((TextView) convertView).setText("W");
+                        Picasso.with(mContext)
+                                .load("http://findicons.com/files/icons/1681/siena/256/wall_red.png")
+                                .resize( 50, 50 )
+                                .into((ImageView)convertView);
                     } else if (val >= 2000000 && val <= 3000000) {
-                        ((TextView) convertView).setText("B");
+                        Picasso.with(mContext)
+                                .load("http://piq.codeus.net/static/media/userpics/piq_42023_400x400.png")
+                                .resize(50, 50)
+                                .into((ImageView) convertView);
                     } else if (val >= 10000000 && val <= 20000000) {
-                        ((TextView) convertView).setText("T");
+                        Picasso.with(mContext)
+                                .load(R.drawable.blue_tank)
+                                .resize( 50, 50 )
+                                .into((ImageView) convertView);
                     } else {
-                        ((TextView) convertView).setText("-");
+                        Picasso.with(mContext)
+                                .load("http://www.johnsusek.com/projects/textures/lawdogs/ground_grass_1024_tile.jpg")
+                                .resize( 50, 50 )
+                                .into((ImageView) convertView);
                     }
                 }
                 else{
-                    ((TextView) convertView).setText("-");
+                    Picasso.with(mContext)
+                            .load("http://www.johnsusek.com/projects/textures/lawdogs/ground_grass_1024_tile.jpg")
+                            .resize( 50, 50 )
+                            .into((ImageView) convertView);
                 }
             }
         }
-
         return convertView;
     }
 }
