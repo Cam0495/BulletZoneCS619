@@ -16,6 +16,7 @@ import android.widget.GridView;
 import edu.unh.cs.cs619_2015_project2.g10.rest.BulletZoneRestClient;
 import edu.unh.cs.cs619_2015_project2.g10.rest.PollerTask;
 import edu.unh.cs.cs619_2015_project2.g10.ui.GridAdapter;
+import edu.unh.cs.cs619_2015_project2.g10.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -24,6 +25,9 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.rest.RestService;
 
+/**
+ * Main activity. Shows the UI.
+ */
 @EActivity(edu.unh.cs.cs619_2015_project2.g10.R.layout.activity_main)
 public class TankClientActivity extends AppCompatActivity {
 
@@ -42,9 +46,7 @@ public class TankClientActivity extends AppCompatActivity {
     @Bean
     PollerTask gridPollTask;
 
-    Button left, right, up, down, fire;
-
-    GameController mController;
+    TankService mTankService;
 
     private long tankId = -1;
 
@@ -55,9 +57,7 @@ public class TankClientActivity extends AppCompatActivity {
 
         gridView = (GridView) findViewById(edu.unh.cs.cs619_2015_project2.g10.R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
-
-        mController = new GameController( this );
-        initButtons( );
+        mTankService = new TankService( restClient, tankId );
         displayGrid();
     }
 
@@ -106,42 +106,43 @@ public class TankClientActivity extends AppCompatActivity {
         gridPollTask.addObserver(mGridAdapter);
     }
 
-    private void initButtons( ){
-        left = (Button) findViewById( R.id.left_button );
-        left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mController.execute( v );
-            }
-        });
-        right = (Button) findViewById( R.id.right_button );
-        right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mController.execute( v );
-            }
-        });
-        up = (Button) findViewById( R.id.up_button );
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mController.execute( v );
-            }
-        });
-        down = (Button) findViewById( R.id.down_button );
-        down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mController.execute( v );
-            }
-        });
-        fire = (Button) findViewById( R.id.fire_button );
-        fire.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mController.execute( v );
-            }
-        });
+
+    /**
+     * These next methods call the game controller for the movement
+     * and control.
+     *
+     * @param view
+     */
+    @Background
+    public void moveUp(View view ){
+        mTankService.move(mTankService.getOrientation(), (byte) 0);
+        Log.d(TAG, "MOVE UP");
     }
+
+    @Background
+    public void moveDown( View view ){
+        mTankService.move(mTankService.getOrientation(), (byte) 4);
+        Log.d(TAG, "MOVE DOWN");
+    }
+
+    @Background
+    public void turnLeft(View view ){
+
+        mTankService.move(mTankService.getOrientation(), (byte) 6);
+        Log.d(TAG, "TURN LEFT");
+    }
+
+    @Background
+    public void turnRight(View view ){
+        mTankService.move(mTankService.getOrientation(), (byte) 2);
+        Log.d(TAG, "TURN RIGHT");
+    }
+
+    @Background
+    public void fire( View view ){
+        mTankService.fire();
+        Log.d(TAG, "FIRED");
+    }
+
 
 }

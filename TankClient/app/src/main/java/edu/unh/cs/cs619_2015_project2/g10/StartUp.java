@@ -8,7 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-
+/**
+ * Startup activity to join the game.
+ */
 public class StartUp extends AppCompatActivity {
 
     @Override
@@ -31,6 +33,9 @@ public class StartUp extends AppCompatActivity {
         });
     }
 
+    /**
+     * Starts the main activity.
+     */
     private void startMain( ){
         Intent intent = new Intent( StartUp.this, TankClientActivity_.class );
         StartUp.this.startActivity( intent );

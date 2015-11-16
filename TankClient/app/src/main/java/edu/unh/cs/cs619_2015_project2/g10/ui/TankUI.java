@@ -4,6 +4,7 @@ import android.content.Context;
 
 /**
  * Created by cdevine on 10/30/2015.
+ * Tank UI to keep track of health and bullets.
  */
 public class TankUI implements GameEntityUI{
 

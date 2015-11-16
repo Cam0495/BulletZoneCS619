@@ -17,6 +17,9 @@ import edu.unh.cs.cs619_2015_project2.g10.util.GridWrapper;
 
 import java.util.Observable;
 
+/**
+ * Constantly communicates with the server.
+ */
 @EBean
 public class PollerTask extends Observable{
     private static final String TAG = "GridPollerTask";
@@ -33,6 +36,10 @@ public class PollerTask extends Observable{
         }
     }
 
+    /**
+     * Updates grid.
+     * @param gw
+     */
     @UiThread
     public void onGridUpdate(GridWrapper gw) {
         Log.d(TAG, "grid at timestamp: " + gw.getTimeStamp());
