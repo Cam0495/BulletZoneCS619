@@ -1,4 +1,4 @@
-package com.cs619.karen.tankclient.util;
+package edu.unh.cs.cs619_2015_project2.g10.util;
 
 /**
  * Created by simon on 10/1/14.

@@ -1,4 +1,4 @@
-package com.cs619.karen.tankclient.ui;
+package edu.unh.cs.cs619_2015_project2.g10.ui;
 
 import android.content.Context;
 

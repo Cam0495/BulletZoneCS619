@@ -23,7 +23,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.cs619.karen.tankclient"
+        applicationId "edu.unh.cs.cs619_2015_project2.g10"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
