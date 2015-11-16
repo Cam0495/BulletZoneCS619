@@ -10,13 +10,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
 import edu.unh.cs.cs619_2015_project2.g10.rest.BulletZoneRestClient;
 import edu.unh.cs.cs619_2015_project2.g10.rest.PollerTask;
 import edu.unh.cs.cs619_2015_project2.g10.ui.GridAdapter;
-import edu.unh.cs.cs619_2015_project2.g10.util.ShakeListener;
-import edu.unh.cs.cs619_2015_project2.g10.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -43,13 +42,11 @@ public class TankClientActivity extends AppCompatActivity {
     @Bean
     PollerTask gridPollTask;
 
+    Button left, right, up, down, fire;
+
+    GameController mController;
+
     private long tankId = -1;
-
-    private TankService mTankService;
-
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    private ShakeListener mShakeDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +55,10 @@ public class TankClientActivity extends AppCompatActivity {
 
         gridView = (GridView) findViewById(edu.unh.cs.cs619_2015_project2.g10.R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
+
+        mController = new GameController( this );
+        initButtons( );
         displayGrid();
-        addShaker();
     }
 
     @Override
@@ -94,7 +93,6 @@ public class TankClientActivity extends AppCompatActivity {
     void joinAsync() {
         try {
             tankId = restClient.join().getResult();
-            mTankService = new TankService( restClient, tankId );
             Log.d(TAG, "tankId is " + tankId);
             gridPollTask.doPoll(); // start polling the server
         } catch (Exception e) {
@@ -108,52 +106,42 @@ public class TankClientActivity extends AppCompatActivity {
         gridPollTask.addObserver(mGridAdapter);
     }
 
-    private void addButtonLister(){
-       // myListener = new ButtonListener( mTankService );
-    }
-
-    private void addShaker( ){
-        mSensorManager = (SensorManager) getSystemService( Context.SENSOR_SERVICE );
-        mAccelerometer = mSensorManager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
-        mShakeDetector = new ShakeListener();
-        mShakeDetector.setOnShakeListener(new ShakeListener.OnShakeListener() {
+    private void initButtons( ){
+        left = (Button) findViewById( R.id.left_button );
+        left.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onShake(int count) {
-                Log.d(TAG, "SHOOK");
-                //fire( );
+            public void onClick(View v) {
+                mController.execute( v );
             }
         });
-    }
-
-    @Background
-    public void moveUp(View view ){
-        mTankService.move(mTankService.getOrientation(), (byte) 0);
-        Log.d(TAG, "MOVE UP");
-    }
-
-    @Background
-    public void moveDown( View view ){
-        mTankService.move(mTankService.getOrientation(), (byte) 4);
-        Log.d(TAG, "MOVE DOWN");
-    }
-
-    @Background
-    public void turnLeft(View view ){
-
-        mTankService.move(mTankService.getOrientation(), (byte) 6);
-        Log.d(TAG, "TURN LEFT");
-    }
-
-    @Background
-    public void turnRight(View view ){
-        mTankService.move(mTankService.getOrientation(), (byte) 2);
-        Log.d(TAG, "TURN RIGHT");
-    }
-
-    @Background
-    public void fire( View view ){
-        mTankService.fire();
-        Log.d(TAG,"FIRED");
+        right = (Button) findViewById( R.id.right_button );
+        right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mController.execute( v );
+            }
+        });
+        up = (Button) findViewById( R.id.up_button );
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mController.execute( v );
+            }
+        });
+        down = (Button) findViewById( R.id.down_button );
+        down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mController.execute( v );
+            }
+        });
+        fire = (Button) findViewById( R.id.fire_button );
+        fire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mController.execute( v );
+            }
+        });
     }
 
 }
