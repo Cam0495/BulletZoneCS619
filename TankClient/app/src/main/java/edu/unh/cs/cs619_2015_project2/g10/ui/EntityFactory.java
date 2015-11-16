@@ -4,6 +4,7 @@ import android.content.Context;
 
 /**
  * Created by cam04_000 on 11/9/2015.
+ * Abstract Factory
  */
 public abstract class EntityFactory {
 

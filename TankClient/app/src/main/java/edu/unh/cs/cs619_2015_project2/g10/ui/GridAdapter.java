@@ -13,6 +13,9 @@ import edu.unh.cs.cs619_2015_project2.g10.R;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Grid adapter updates the grid for the client.
+ */
 @EBean
 public class GridAdapter extends BaseAdapter implements Observer {
 
@@ -85,7 +88,7 @@ public class GridAdapter extends BaseAdapter implements Observer {
                                 .into((ImageView) convertView);
                     } else if (val >= 10000000 && val <= 20000000) {
                         String stringID = Integer.toString(val);
-                        int direction = Integer.parseInt(stringID.substring(6, 7));
+                        int direction = Integer.parseInt(stringID.substring( 7));
                         int rotate = 0;
                         if( direction == 2 )
                             rotate = 90;
