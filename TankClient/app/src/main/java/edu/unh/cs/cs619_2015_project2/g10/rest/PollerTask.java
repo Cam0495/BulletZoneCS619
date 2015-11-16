@@ -1,4 +1,4 @@
-package com.cs619.karen.tankclient.rest;
+package edu.unh.cs.cs619_2015_project2.g10.rest;
 
 /**
  * Created by karenjin on 10/21/15.
@@ -7,28 +7,15 @@ package com.cs619.karen.tankclient.rest;
 import android.os.SystemClock;
 
 import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.rest.RestService;
 
-import android.os.SystemClock;
 import android.util.Log;
 
-import com.cs619.karen.tankclient.TankClientActivity;
-import com.cs619.karen.tankclient.ui.GridUI;
-import com.cs619.karen.tankclient.util.GridWrapper;
-
-import org.androidannotations.annotations.Background;
-import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.EBean;
-import org.androidannotations.annotations.RootContext;
-import org.androidannotations.annotations.UiThread;
-import org.androidannotations.annotations.rest.RestService;
+import edu.unh.cs.cs619_2015_project2.g10.util.GridWrapper;
 
 import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
 
 @EBean
 public class PollerTask extends Observable{

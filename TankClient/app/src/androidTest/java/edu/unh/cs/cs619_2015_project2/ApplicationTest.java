@@ -1,4 +1,4 @@
-package com.cs619.karen.tankclient;
+package edu.unh.cs.cs619_2015_project2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

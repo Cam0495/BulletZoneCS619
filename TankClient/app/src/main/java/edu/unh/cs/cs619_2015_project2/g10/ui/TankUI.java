@@ -1,12 +1,6 @@
-package com.cs619.karen.tankclient.ui;
+package edu.unh.cs.cs619_2015_project2.g10.ui;
 
-import android.graphics.drawable.Drawable;
 import android.content.Context;
-import android.media.Image;
-import android.support.v4.content.ContextCompat;
-import android.widget.ImageView;
-
-import com.cs619.karen.tankclient.R;
 
 /**
  * Created by cdevine on 10/30/2015.

@@ -1,4 +1,4 @@
-package com.cs619.karen.tankclient.ui;
+package edu.unh.cs.cs619_2015_project2.g10.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.SystemService;
 import com.squareup.picasso.Picasso;
-import com.cs619.karen.tankclient.R;
+import edu.unh.cs.cs619_2015_project2.g10.R;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -77,16 +77,27 @@ public class GridAdapter extends BaseAdapter implements Observer {
                         Picasso.with(mContext)
                                 .load("http://findicons.com/files/icons/1681/siena/256/wall_red.png")
                                 .resize( 50, 50 )
-                                .into((ImageView)convertView);
+                                .into((ImageView) convertView);
                     } else if (val >= 2000000 && val <= 3000000) {
                         Picasso.with(mContext)
                                 .load("http://piq.codeus.net/static/media/userpics/piq_42023_400x400.png")
                                 .resize(50, 50)
                                 .into((ImageView) convertView);
                     } else if (val >= 10000000 && val <= 20000000) {
+                        String stringID = Integer.toString(val);
+                        int direction = Integer.parseInt(stringID.substring(6, 7));
+                        int rotate = 0;
+                        if( direction == 2 )
+                            rotate = 90;
+                        else if( direction == 4 )
+                            rotate = 180;
+                        else if( direction == 6 )
+                            rotate = 270;
+
                         Picasso.with(mContext)
                                 .load(R.drawable.blue_tank)
-                                .resize( 50, 50 )
+                                .resize(50, 50)
+                                .rotate( rotate )
                                 .into((ImageView) convertView);
                     } else {
                         Picasso.with(mContext)
