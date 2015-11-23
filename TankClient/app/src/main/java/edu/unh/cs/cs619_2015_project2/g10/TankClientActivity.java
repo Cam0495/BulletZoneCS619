@@ -74,6 +74,7 @@ public class TankClientActivity extends AppCompatActivity {
 				 */
                 //handleShakeEvent(count);
                 Log.d(TAG, "SHOOK");
+                fire();
             }
         });
 
@@ -176,7 +177,7 @@ public class TankClientActivity extends AppCompatActivity {
     }
 
     @Background
-    public void fire( View view ){
+    public void fire(  ){
         mTankService.fire();
         Log.d(TAG, "FIRED");
     }
