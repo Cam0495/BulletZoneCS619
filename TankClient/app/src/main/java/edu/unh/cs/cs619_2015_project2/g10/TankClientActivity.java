@@ -178,8 +178,7 @@ public class TankClientActivity extends AppCompatActivity {
     public void fire(  ){
 
 
-
-
+        
         if( fireCount < 2 )
         {
             mTankService.fire();
