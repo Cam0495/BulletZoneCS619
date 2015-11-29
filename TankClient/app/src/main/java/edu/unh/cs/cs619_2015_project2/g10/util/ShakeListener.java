@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 
 /**
  * Created by BBryant12 on 11/9/15.
+ * Completed by Peter Guarino on 11/23/15
  */
 public class ShakeListener implements SensorEventListener {
 

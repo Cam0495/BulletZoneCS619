@@ -67,12 +67,7 @@ public class TankClientActivity extends AppCompatActivity {
 
             @Override
             public void onShake(int count) {
-				/*
-				 * The following method, "handleShakeEvent(count):" is a stub //
-				 * method you would use to setup whatever you want done once the
-				 * device has been shook.
-				 */
-                //handleShakeEvent(count);
+
                 Log.d(TAG, "SHOOK");
                 fire();
             }
@@ -176,10 +171,27 @@ public class TankClientActivity extends AppCompatActivity {
         Log.d(TAG, "TURN RIGHT");
     }
 
+
+    int fireCount = 0;
+    long lastStamp = 0;
     @Background
     public void fire(  ){
-        mTankService.fire();
-        Log.d(TAG, "FIRED");
+
+
+
+
+        if( fireCount < 2 )
+        {
+            mTankService.fire();
+            Log.d(TAG, "FIRED");
+            fireCount++;
+        }
+
+
+        if( fireCount >= 2 &&  restClient.grid().getTimeStamp() > (lastStamp + 3000)){
+            fireCount = 0;
+        }
+        lastStamp = restClient.grid().getTimeStamp();
     }
 
 
