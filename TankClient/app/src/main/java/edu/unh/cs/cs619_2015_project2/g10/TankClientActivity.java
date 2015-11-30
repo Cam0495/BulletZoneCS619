@@ -178,7 +178,7 @@ public class TankClientActivity extends AppCompatActivity {
     public void fire(  ){
 
 
-        
+
         if( fireCount < 2 )
         {
             mTankService.fire();
@@ -187,8 +187,9 @@ public class TankClientActivity extends AppCompatActivity {
         }
 
 
-        if( fireCount >= 2 &&  restClient.grid().getTimeStamp() > (lastStamp + 3000)){
+        if( fireCount >= 2 &&  restClient.grid().getTimeStamp() > (lastStamp + 1000)){
             fireCount = 0;
+
         }
         lastStamp = restClient.grid().getTimeStamp();
     }
