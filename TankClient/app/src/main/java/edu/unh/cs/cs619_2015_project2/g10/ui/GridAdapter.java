@@ -10,6 +10,8 @@ import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.SystemService;
 import com.squareup.picasso.Picasso;
 import edu.unh.cs.cs619_2015_project2.g10.R;
+import edu.unh.cs.cs619_2015_project2.g10.util.DbService;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,6 +23,8 @@ public class GridAdapter extends BaseAdapter implements Observer {
 
     private final Object monitor = new Object();
 
+    private DbService dbService;
+
     @SystemService
     protected LayoutInflater inflater;
 
@@ -28,17 +32,22 @@ public class GridAdapter extends BaseAdapter implements Observer {
     private int[][] mEntities = new int[16][16];
 
     public GridAdapter( Context context ){
+
         mContext = context;
+        //dbService = new DbService()
     }
 
     @Override
     public void update( Observable observer, Object object ){
+
         updateList( (int[][]) object );
+
     }
 
     public void updateList(int[][] entities) {
         synchronized (monitor) {
             this.mEntities = entities;
+
             this.notifyDataSetChanged();
         }
     }
