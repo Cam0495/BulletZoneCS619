@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="edu.unh.cs.cs619_2015_project2.g10.Replay">
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnWidth="20dp"
+        android:numColumns="16"
+        android:layout_weight="1"
+        tools:listitem="@layout/field_item"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="69dp"
+        android:layout_weight="0.12">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play"
+            android:id="@+id/play_button"
+            android:layout_gravity="bottom"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x2"
+            android:id="@+id/double_button"
+            android:layout_gravity="bottom"
+            android:layout_below="@+id/play_button"
+            android:layout_toLeftOf="@+id/play_button"
+            android:layout_toStartOf="@+id/play_button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x4"
+            android:id="@+id/four_button"
+            android:layout_gravity="bottom"
+            android:layout_alignTop="@+id/double_button"
+            android:layout_toRightOf="@+id/play_button"
+            android:layout_toEndOf="@+id/play_button" />
+    </RelativeLayout>
+
+
+</LinearLayout>
