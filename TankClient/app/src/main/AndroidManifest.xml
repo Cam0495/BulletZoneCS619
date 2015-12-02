@@ -3,7 +3,9 @@
     package="edu.unh.cs.cs619_2015_project2.g10" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
 
+    
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />

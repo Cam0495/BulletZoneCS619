@@ -16,6 +16,7 @@ import android.widget.GridView;
 import edu.unh.cs.cs619_2015_project2.g10.rest.BulletZoneRestClient;
 import edu.unh.cs.cs619_2015_project2.g10.rest.PollerTask;
 import edu.unh.cs.cs619_2015_project2.g10.ui.GridAdapter;
+import edu.unh.cs.cs619_2015_project2.g10.util.ShakeListener;
 import edu.unh.cs.cs619_2015_project2.g10.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
@@ -50,15 +51,33 @@ public class TankClientActivity extends AppCompatActivity {
 
     private long tankId = -1;
 
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeListener mShakeDetector;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(edu.unh.cs.cs619_2015_project2.g10.R.layout.activity_main);
 
+        // ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeListener();
+        mShakeDetector.setOnShakeListener(new ShakeListener.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+
+                Log.d(TAG, "SHOOK");
+                fire();
+            }
+        });
+
         gridView = (GridView) findViewById(edu.unh.cs.cs619_2015_project2.g10.R.id.gridView);
         mGridAdapter = new GridAdapter( TankClientActivity.this );
         mTankService = new TankService( restClient, tankId );
         displayGrid();
+
     }
 
     @Override
@@ -81,6 +100,7 @@ public class TankClientActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @AfterViews
     protected void afterViewInjection() {
@@ -107,6 +127,19 @@ public class TankClientActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    public void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
     /**
      * These next methods call the game controller for the movement
      * and control.
@@ -138,10 +171,27 @@ public class TankClientActivity extends AppCompatActivity {
         Log.d(TAG, "TURN RIGHT");
     }
 
+
+    int fireCount = 0;
+    long lastStamp = 0;
     @Background
-    public void fire( View view ){
-        mTankService.fire();
-        Log.d(TAG, "FIRED");
+    public void fire(  ){
+
+
+
+        if( fireCount < 2 )
+        {
+            mTankService.fire();
+            Log.d(TAG, "FIRED");
+            fireCount++;
+        }
+
+
+        if( fireCount >= 2 &&  restClient.grid().getTimeStamp() > (lastStamp + 1000)){
+            fireCount = 0;
+
+        }
+        lastStamp = restClient.grid().getTimeStamp();
     }
 
 

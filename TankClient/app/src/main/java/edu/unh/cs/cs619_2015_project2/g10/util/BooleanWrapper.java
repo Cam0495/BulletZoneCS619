@@ -2,7 +2,7 @@ package edu.unh.cs.cs619_2015_project2.g10.util;
 
 
 public class BooleanWrapper {
-    private boolean result;
+    public boolean result;
 
     public BooleanWrapper() {}
 
