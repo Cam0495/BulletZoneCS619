@@ -24,5 +24,6 @@
         completions."
     </string>
     <string name="title_activity_start_up">StartUp</string>
+    <string name="title_activity_replay">Replay</string>
 
 </resources>
