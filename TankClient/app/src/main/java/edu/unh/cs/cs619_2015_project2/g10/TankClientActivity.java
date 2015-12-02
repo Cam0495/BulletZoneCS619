@@ -17,6 +17,7 @@ import edu.unh.cs.cs619_2015_project2.g10.rest.BulletZoneRestClient;
 import edu.unh.cs.cs619_2015_project2.g10.rest.PollerTask;
 import edu.unh.cs.cs619_2015_project2.g10.ui.GridAdapter;
 import edu.unh.cs.cs619_2015_project2.g10.util.ShakeListener;
+import edu.unh.cs.cs619_2015_project2.g10.util.SoundFX;
 import edu.unh.cs.cs619_2015_project2.g10.util.TankService;
 
 import org.androidannotations.annotations.AfterViews;
@@ -34,7 +35,7 @@ public class TankClientActivity extends AppCompatActivity {
 
     private static final String TAG = "TankClientActivity";
 
-
+    private SoundFX soundFX;
     @Bean
     protected GridAdapter mGridAdapter;
 
@@ -59,6 +60,7 @@ public class TankClientActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(edu.unh.cs.cs619_2015_project2.g10.R.layout.activity_main);
 
+        final Context context = this;
         // ShakeDetector initialization
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -69,7 +71,7 @@ public class TankClientActivity extends AppCompatActivity {
             public void onShake(int count) {
 
                 Log.d(TAG, "SHOOK");
-                fire();
+                fire(View.inflate(context, R.layout.activity_main,null));
             }
         });
 
@@ -78,8 +80,15 @@ public class TankClientActivity extends AppCompatActivity {
         mTankService = new TankService( restClient, tankId );
         displayGrid();
 
+        soundFX = new SoundFX(this);
+
+
+
     }
 
+    public long getTime(){
+        return restClient.grid().getTimeStamp();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -175,13 +184,14 @@ public class TankClientActivity extends AppCompatActivity {
     int fireCount = 0;
     long lastStamp = 0;
     @Background
-    public void fire(  ){
+    public void fire(View V){
 
 
 
         if( fireCount < 2 )
         {
             mTankService.fire();
+            soundFX.play();
             Log.d(TAG, "FIRED");
             fireCount++;
         }
@@ -193,6 +203,7 @@ public class TankClientActivity extends AppCompatActivity {
         }
         lastStamp = restClient.grid().getTimeStamp();
     }
+
 
 
 }
